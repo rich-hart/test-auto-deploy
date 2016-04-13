@@ -1,0 +1,18 @@
+---
+
+# Ensure the system is up-to-date before we do anything.
+# This prevents errors related to missing external resources.
+#- name: create openstax user
+#  hosts: vagrant
+#  sudo: true
+#  tasks:
+#    - command: useradd openstax
+#    - command: adduser openstax sudo
+#    - user: shell=/bin/bash name=openstax groups=sudo
+
+- name: deploy cms
+  hosts: vagrant
+  sudo: yes
+  roles:
+    - inspection
+

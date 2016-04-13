@@ -1,0 +1,17 @@
+[vagrant]
+oscms-vagrant.openstax.local ansible_ssh_host=192.168.24.48 ansible_ssh_port=22
+
+[vagrant:vars]
+postgresql_version = 9.4
+postgresql_user = postgres
+
+environment_name = 'vagrant'
+app_domain = oscms-vagrant.openstax.local
+oscms_db_password = ""
+oscms_salesforce_username = "ecw1@rice.edu" 
+oscms_salesforce_password = "OpenStax2016"
+oscms_salesforce_security_token = "YAKTBF0gwyhwIIREYntKNqGPm"
+social_auth_openstax_key = "0a3c6b8c21091873805181b4b2a42cdbabeec6f6871332b817f59fac37033537"
+social_auth_openstax_secret = "40035a7f2a7948b33ffce370af3918d692b958a6cc195e8b57b1fbe621a88157"
+secret_key = "daVHWGf0yIYSSk6GyDUGzEhbmhOdp0/yxl2qEdMd8Ss="
+ 
