@@ -7,16 +7,10 @@ Vagrant.configure(2) do |config|
   config.vm.network :private_network, ip: "192.168.24.48"
   config.vm.network :forwarded_port, guest: 80, host: 9990
   config.vm.network :forwarded_port, guest: 443, host: 9991
-  config.vm.network :forwarded_port, guest: 8001, host: 8001
-  config.vm.hostname = 'oscms-vagrant.local'
+  config.vm.hostname = 'qa-automation.local'
   config.vm.provider "virtualbox" do |v|
-#  config.ssh.username = 'root'
-#  config.ssh.password = 'vagrant'
-#`  config.ssh.insert_key = 'true'
-
-#  config.ssh.username = "openstax"
     v.memory = 1024 * 4
-    v.cpus = 4
+    v.cpus = 1
   end
 
   # Provision the machine using an ansible playbook.
