@@ -10,9 +10,18 @@
 #    - command: adduser openstax sudo
 #    - user: shell=/bin/bash name=openstax groups=sudo
 
+# Ensure the system is up-to-date before we do anything.
+# This prevents errors related to missing external resources.
+- name: update system
+  hosts: vagrant
+  sudo: true
+  tasks:
+    - include: tasks/apt-update.yml
+
 - name: deploy cms
   hosts: vagrant
   sudo: yes
   roles:
+    - postgres
     - inspection
 

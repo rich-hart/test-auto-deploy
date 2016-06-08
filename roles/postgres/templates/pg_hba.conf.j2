@@ -1,0 +1,21 @@
+# Database administrative login by Unix domain socket
+local   all             postgres                                trust
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# Local network connections
+host   repository      rhaptos         128.42.169.0/24          trust
+host   repository      backups         128.42.169.0/24          trust
+host   repository      postgres        128.42.169.0/24          trust
+# Trust Ross. O.o
+host   all             all             10.64.71.19/32           trust
+# Trust all local connetions
+local  all             all                                      trust
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+host   replication     replicator      128.42.169.0/24          md5
+local  replication     postgres                                 peer

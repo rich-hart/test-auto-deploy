@@ -1,7 +1,4 @@
 ---
-- name: update apt-cache
-  apt: update_cache=yes
-
 - name: install system packages
   apt: name={{item}} state=present
   with_items:
@@ -13,7 +10,7 @@
      - python-opencv
      - pdftk
      - git
-
+     - python3-pip
 
 - name: remove libdc1394 error
   command: ln /dev/null /dev/raw1394
@@ -23,15 +20,40 @@
 - name: upgrade pip
   pip: name=pip extra_args='-U'
 
-- name: upgrade pip
+- name: install pyPdf
   pip: name=pyPdf
 
+- name: install ipdb
+  pip: name=ipdb
+
 - git: repo=https://github.com/openstax/test-automation.git
-       dest=/vagrant/src
+       dest=/vagrant/src/test-automation
        update=no
+
 - name: install ox_inspect
-  command: python setup.py install
-           chdir=/vagrant/src/inspection
-  
+  command: python2.7 setup.py install
+           chdir=/vagrant/src/test-automation/inspection
 
+- git: repo=https://github.com/rich-hart/test_auto_ui.git
+       dest=/vagrant/src/test_auto_ui
+       update=no
 
+- name: install django server
+  command: pip3 install -r requirements/base.txt
+           chdir=/vagrant/src/test_auto_ui
+
+- name: create database user
+  command: psql -U postgres -d postgres -c "CREATE USER openstax WITH SUPERUSER PASSWORD 'openstax';"
+
+- name: create database
+  command: createdb -U postgres -O openstax qa_automation
+
+- name: migrate database
+  command: python3 manage.py migrate
+           chdir=/vagrant/src/test_auto_ui
+
+#- name: run server
+#  command: python3 manage.py runserver 192.168.24.48:8001
+#           chdir=/vagrant/src/test_auto_ui
+
+ 
