@@ -29,6 +29,9 @@
 - git: repo=https://github.com/openstax/test-automation.git
        dest=/vagrant/src
        update=no
-
+- name: install ox_inspect
+  command: python setup.py install
+           chdir=/vagrant/src/inspection
+  
 
 
